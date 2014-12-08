@@ -1,0 +1,12 @@
+<center>
+<h1>RapidShare Upload New File</h1>
+<br/><br/><br/><br/><br/><br/>
+
+<%= form_for @fileupload do |f| %>
+    <%= f.file_field :file %>
+    <%= f.submit "upload here", :class => 'btn btn-primary' %>
+<% end %>
+
+<br/>
+<%= link_to 'Back', file_uploads_path %>
+</center>

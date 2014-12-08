@@ -1,0 +1,36 @@
+<center><h1>Rapid Share Index</h1>
+
+<%= link_to 'Upload New File', new_file_upload_path %>
+
+<div class="container">
+  <% flash.each do |k, v| %>
+      <%= content_tag(:div, v, class: "alert alert-#{k}") %>
+  <% end %>
+</div>
+
+  </center>
+<br/><br/><br/>
+
+<table width="500" align="center">
+  <tr>
+    <th width="5%">Name</th>
+    <th width="5%">Size</th>
+    <th width="5%">Content-type</th>
+    <!--<th width="5%">Path</th>-->
+
+  </tr>
+
+  <% @fileupload.each do |file| %>
+      <tr align="center">
+        <td><%= file.id %></td>
+        <td><%= file.name %></td>
+        <td><%= file.size %></td>
+        <td><%= file.content_type %></td>
+        <td><%= link_to "Download", download_path(file.id), :method => 'get' %></td>
+        <!--<td><%= file.path %></td>-->
+        <td><%= link_to 'Display', file_upload_path(file.id) %></td>
+        <td><%= link_to 'Destroy', file_upload_path(file.id), :method => 'delete' %></td>
+
+      </tr>
+  <% end %>
+</table>
