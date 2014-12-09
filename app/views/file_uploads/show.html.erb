@@ -1,24 +1,33 @@
-<h1>File Information</h1>
-<p>
-  <strong>File name:</strong>
-  <%= @fileupload.name %>
-</p>
-<p>
-  <strong>Size:</strong>
-  <%= @fileupload.size %>
-</p>
-<p>
-  <strong>Content-type:</strong>
-  <%= @fileupload.content_type %>
-</p>
-<p>
-  <strong>Download Link:</strong>
-  <%= link_to "Download", download_path(@fileupload.id), :method => 'get' %>
-</p>
+<h2>File Information</h2>
+<br/><br/><br/>
 
-<p>
-  <strong>Delete Link:</strong>
+<table class="table col-md-2">
+  <tr align="center">
+    <td><strong>File name:</strong></td>
+    <td><%= @fileupload.name %></td>
+  </tr>
+
+  <tr align="center">
+    <td><strong>Size:</strong></td>
+    <td><%= @fileupload.size %></td>
+  </tr>
+
+  <tr align="center">
+    <td><strong>Content-type:</strong></td>
+    <td><%= @fileupload.content_type %></td>
+  </tr>
+
+  <tr align="center">
+    <td><strong>Download Link:</strong></td>
+    <td><%= link_to "Download", download_path(@fileupload.id), :method => 'get' %></td>
+  </tr>
+
+  <tr align="center">
+    <td><strong>Delete Link:</strong></td>
     <td><%= link_to 'Destroy', file_upload_path(@fileupload.id), :method => 'delete' %></td>
-</p>
+  </tr>
+</table>
 
-<%= link_to 'Back', file_uploads_path %>
+
+
+<%= button_to 'Back', file_uploads_path, :class => "btn btn-lg btn-primary" %>

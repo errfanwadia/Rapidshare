@@ -1,0 +1,29 @@
+<!--<h1>Sessions#new</h1>-->
+<!--<p>Find me in app/views/sessions/new.html.erb</p>-->
+
+
+<!--<h1>Log in</h1>-->
+
+<div class="container" style="width: 40%">
+
+
+  <div class="form-signin" role="form">
+    <%= form_tag sessions_path do%>
+
+        <br/><br/><br/><br/><br/><br/>
+        <h2 class="form-signin-heading">RapidShare Login</h2><br/>
+
+        <%= text_field_tag :email, params[:email], :type => "email", :id=>"inputEmail", :class => "form-control",  :placeholder => "Email address"%>
+        <%= text_field_tag :password, params[:email], :type => "password", :id=>"inputPassword", :class => "form-control",  :placeholder => "Password"%><br/>
+
+        <p class="button">
+        <%= submit_tag "Log in", class:'btn btn-lg btn-primary btn-block'%>
+        </p>
+        <br/>
+        <center>OR</center><br/>
+        <%= link_to "Signup", sign_up_path %>
+
+    <% end %>
+  </div>
+
+</div>

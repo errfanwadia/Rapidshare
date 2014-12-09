@@ -1,14 +1,27 @@
 Rails.application.routes.draw do
+  # get 'sessions/new'
+
+  # root 'file_uploads#index'
+
+  get 'file_uploads/:id/download' => 'file_uploads#download', as: 'download'
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "sign_up" => "users#new", :as => "sign_up"
+  root "users#new"
+
   resources :file_uploads
+  resources :users,  :only => [:new, :create]
+  resources :sessions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'file_uploads#index'
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
-  get 'file_uploads/:id/download' => 'file_uploads#download', as: 'download'
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

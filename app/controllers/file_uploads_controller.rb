@@ -1,19 +1,23 @@
 class FileUploadsController < ApplicationController
   # before_filter :verify_create_params, :only => :create
+  before_action :check_signed_in
+
+  before_action :check_authorized, only: [:show, :destroy, :download]
+
   def create
 
     unless file_params
-      redirect_to :action => :new
+      redirect_to action: "index" and return
       return
     end
 
-    Rails.logger.info("SHOULD NOT BE HERE")
-    @fileupload = FileUpload.new(file_params)
+    @fileupload = current_user.file_uploads.new(file_params)
 
     if @fileupload.save
       flash[:success] = "#{@fileupload.name} uploaded successfully !!!"
-      redirect_to root_path
+      redirect_to action: "index" and return
     else
+      flash[:error] = "#{@fileupload.name} upload failed !!!"
       render 'new'
     end
   end
@@ -23,27 +27,27 @@ class FileUploadsController < ApplicationController
   end
 
   def show
-    @fileupload = FileUpload.find(params[:id])
+    @fileupload = current_user.file_uploads.find(params[:id])
   end
 
   def download
-    @upload = FileUpload.find(params[:id])
+    @upload = current_user.file_uploads.find(params[:id])
     send_file @upload.path, type: @upload.content_type, disposition: 'attachment'
   end
 
   # get home page
   def index
-    @fileupload = FileUpload.all
+    @fileupload = current_user.file_uploads.all
   end
 
   def destroy
-    @fileupload = FileUpload.find(params[:id])
+    @fileupload = current_user.file_uploads.find(params[:id])
     if @fileupload.destroy
       flash[:success] = "File successfully removed from our system"
     else
       flash[:error] = "Something went wrong while deleting your file"
     end
-    redirect_to root_url
+    redirect_to action: "index" and return
   end
 
   # # # to map
@@ -58,7 +62,6 @@ class FileUploadsController < ApplicationController
       params.require(:file_upload).permit(:file)
     else
       @fileupload = FileUpload.new
-      Rails.logger.info("00349340340------")
       return false
     end
 

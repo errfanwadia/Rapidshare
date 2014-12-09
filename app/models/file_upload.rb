@@ -3,9 +3,14 @@ class FileUpload < ActiveRecord::Base
   before_validation :process
   before_create :upload_file
 
+  # destroy the file
+  before_destroy :destroy_uploaded_file
+
   attr_accessor :file
 
   validates :file, presence: true
+
+  belongs_to :user
 
   def process
     @uploaded_object = self.file

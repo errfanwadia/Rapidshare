@@ -1,0 +1,52 @@
+<style>
+#error_explanation {
+color: #f00;
+ul {
+list-style: none;
+margin: 0 0 18px 0;
+}
+}
+
+.field_with_errors {
+@extend .control-group;
+@extend .error;
+}
+</style>
+
+
+<div class="container" style="width: 40%">
+
+
+<div class="form-signup" role="form">
+  <%= form_for(@user) do |f|%>
+
+      <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <br/><br/><br/><br/><br/><br/>
+    <h2 class="form-signin-heading">RapidShare Signup</h2><br/>
+
+      <%= f.text_field :email, :type => "email", :id=>"inputEmail", :class => "form-control",  :placeholder => "Email address"%>
+      <%= f.password_field :password, :type => "password", :id => "inputPassword", :class => "form-control", :id => "inputPassword", :placeholder => "Password"%>
+      <%= f.password_field :password_confirmation, :type => "password", :id => "inputPassword", :class => "form-control", :placeholder => "Confirm Password"%>
+
+<br/>
+      <%= f.submit class:'btn btn-lg btn-primary btn-block', :value => "Sign up"%><br/>
+      <center>OR</center><br/>
+      <%= link_to "Login", log_in_path %>
+
+    <!--<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>-->
+  <% end %>
+  </div>
+
+</div> <!-- /container -->
+

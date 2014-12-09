@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208112625) do
+ActiveRecord::Schema.define(version: 20141209075049) do
 
   create_table "file_uploads", force: true do |t|
     t.datetime "created_at"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(version: 20141208112625) do
     t.integer  "size"
     t.string   "content_type"
     t.string   "path"
+    t.integer  "user_id"
+  end
+
+  add_index "file_uploads", ["user_id"], name: "index_file_uploads_on_user_id"
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
